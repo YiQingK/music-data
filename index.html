@@ -1,28 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>CS360 Project</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
 <style>
 body, html {
   height: 100%;
-  font-family: "Inconsolata", sans-serif;
-}
-
-.bgimg {
-  background-position: center;
-  background-size: cover;
-  background-image: url("/w3images/coffeehouse.jpg");
-  min-height: 75%;
-}
-
-.menu {
-  display: none;
 }
 </style>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
+
+
 </head>
 <body>
 	<!-- Links (sit on top) -->
@@ -43,7 +34,7 @@ body, html {
 	  </div>
 	</div>
 	<!-- Header with image -->
-	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+	<header class="w3-display-container w3-grayscale-min" id="home">
 	  <div class="w3-display-middle w3-center">
 	    <span class="w3-text-black" style="font-size:90px">CS360 Project<br>Music Taste<br></span>
 	    <span class="w3-text-black" style="font-size:30px">By: Yi Qing Khoo</span>
@@ -63,11 +54,17 @@ body, html {
 
 	<!-- Users Container -->
 	<div class="w3-container" id="users">
-		<div class="w3-content" style="max-height:700px">
-			<h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Which music streaming site has more users?</span></h5>
-
+			<div class="users">
+				<h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Which music streaming site has more users?</span></h5>
+				<script src="index.js"></script>
+			</div>
+	</div>
+		<!-- Data Container -->
+		<div class="w3-container" id="data">
+			<div class="w3-content" style="max-width:700px">
+				<h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Data</span></h5>
+			</div>
 		</div>
 	</div>
-
 </body>
 </html>
