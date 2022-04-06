@@ -6,7 +6,7 @@ var svg_w = d3.select("#map")
     .append("svg")
     .attr("width",canvasWidth)
     .attr("height",canvasHeight)
-    .attr("transform","translate(100,50)");
+    .attr("transform","translate(200,50)");
 
 var width = canvasWidth-margin;
 var height = canvasHeight-margin;

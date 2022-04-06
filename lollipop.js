@@ -7,7 +7,7 @@ var svg_l = d3.select("#lollipop")
     .append("svg")
     .attr("width",canvasWidth)
     .attr("height",canvasHeight)
-    .attr("transform","translate(100,50)");
+    .attr("transform","translate(200,50)");
 
 var width = canvasWidth-margin;
 var height = canvasHeight-margin;
@@ -60,4 +60,6 @@ d3.csv("./data/test_data.csv").then(function(data)
         .attr("r",7.5)
         .style("stroke","black")
         .style("fill","#92a8d1")
+
+
 })
