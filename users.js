@@ -3,7 +3,7 @@ var canvasHeight = 700;
 var margin = 300;
 
 /*Create SVG tag with specified width and height*/
-var svg = d3.select("#users").append("svg")
+var svg_u = d3.select("#users").append("svg")
     .attr("width",canvasWidth)
     .attr("height",canvasHeight)
     .attr("transform","translate(200,0)");
@@ -13,7 +13,7 @@ var width = canvasWidth - margin;
 var height = canvasHeight - margin;
 
 /*Container which graph will be inside of*/
-var container_g = svg.append("g")
+var container_u = svg_u.append("g")
     .attr("transform","translate(" + 100 + "," + 100 +")");
 
 /*Scale for axes*/
@@ -31,9 +31,9 @@ d3.csv("users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date),
         const sumstat = d3.group(data,d=>d.type);
 
         /*X axis*/
-        container_g.append("g")
+        container_u.append("g")
             .attr("transform", "translate(0, " + height + ")")
-            .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m-%y")))
+            .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat("20%y")))
             .append("text")
             .attr("x",350)
             .attr("y",50)
@@ -41,12 +41,12 @@ d3.csv("users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date),
             .text("Date")
 
         /*Y-axis gridline*/
-        container_g.append("g")
+        container_u.append("g")
             .call(d3.axisLeft(yScale).tickSize(-width).tickFormat(""))
             .attr("stroke-opacity",0.1)
 
         /*Y-axis*/
-        container_g.append("g")
+        container_u.append("g")
             .call(d3.axisLeft(yScale))
             .append("text")
             .attr("transform","rotate(-90)")
@@ -56,7 +56,7 @@ d3.csv("users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date),
             .attr("fill", "black")
             .text("Users in millions")
 
-        container_g.selectAll(".line")
+        container_u.selectAll(".line")
             .data(sumstat)
             .join("path")
             .attr("fill", "none")
@@ -69,7 +69,7 @@ d3.csv("users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date),
                     (d[1])
             })
 
-        svg.append("g")
+        svg_u.append("g")
             .attr("class", "legend")
             .attr("transform", "translate(850,100)");
 
@@ -78,6 +78,6 @@ d3.csv("users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date),
             .shapePadding(10)
             .scale(myColor);
 
-        svg.select(".legend")
+        svg_u.select(".legend")
             .call(legend);
     });
