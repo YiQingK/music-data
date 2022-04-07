@@ -16,22 +16,22 @@ var container_b = svg_b.append("g")
     .attr("transform","translate(" + 100 + "," + 100 +")");
 
 /*Scale for axes*/
-var yScale = d3.scaleLinear().range([0,height-50]);
-var xScale = d3.scaleLinear().range([50, width]);
-var myColor = d3.scaleOrdinal().range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00']);
+var yScaleB = d3.scaleLinear().range([0,height-50]);
+var xScaleB = d3.scaleLinear().range([50, width]);
+var myColorB = d3.scaleOrdinal().range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00']);
 
 d3.csv("bump.csv").then(function(data)
 {
-    xScale.domain(d3.extent(data,function(d){return +d.Week;}));
-    yScale.domain(d3.extent(data,function(d){return +d.Position;}));
-    myColor.domain(['Bad Bunny','Taylor Swift','The Weeknd','BTS','Drake']);
+    xScaleB.domain(d3.extent(data,function(d){return +d.Week;}));
+    yScaleB.domain(d3.extent(data,function(d){return +d.Position;}));
+    myColorB.domain(['Bad Bunny','Taylor Swift','The Weeknd','BTS','Drake']);
 
     const sumstat = d3.group(data,d=>d.Singer);
 
     /*X axis*/
     container_b.append("g")
         .attr("transform", "translate(0, " + height + ")")
-        .call(d3.axisBottom(xScale).ticks(5))
+        .call(d3.axisBottom(xScaleB).ticks(5))
         .append("text")
         .attr("x",350)
         .attr("y",50)
@@ -40,7 +40,7 @@ d3.csv("bump.csv").then(function(data)
 
     /*Y-axis*/
     container_b.append("g")
-        .call(d3.axisLeft(yScale).ticks(5))
+        .call(d3.axisLeft(yScaleB).ticks(5))
         .append("text")
         .attr("transform","rotate(-90)")
         .attr("y",0)
@@ -53,12 +53,12 @@ d3.csv("bump.csv").then(function(data)
         .data(sumstat)
         .join("path")
         .attr("fill", "none")
-        .attr("stroke", function(d){ return myColor(d[0]) })
+        .attr("stroke", function(d){ return myColorB(d[0]) })
         .attr("stroke-width", 2)
         .attr("d", function(d){
             return d3.line()
-                .x(function(d) { return xScale(d.Week); })
-                .y(function(d) { return yScale(+d.Position); })
+                .x(function(d) { return xScaleB(d.Week); })
+                .y(function(d) { return yScaleB(+d.Position); })
                 (d[1])
         })
     container_b.append("g")
@@ -66,10 +66,10 @@ d3.csv("bump.csv").then(function(data)
         .data(data)
         .enter()
         .append("circle")
-        .attr("cx",function(d){return xScale(d.Week);})
-        .attr("cy",function(d){return yScale(d.Position);})
+        .attr("cx",function(d){return xScaleB(d.Week);})
+        .attr("cy",function(d){return yScaleB(d.Position);})
         .attr("r",10)
-        .style("fill",function(d){return myColor(d.Singer);})
+        .style("fill",function(d){return myColorB(d.Singer);})
 
     svg_b.append("g")
         .attr("class", "legend")
@@ -78,7 +78,7 @@ d3.csv("bump.csv").then(function(data)
     var legend = d3.legendColor()
         .shape("circle")
         .shapePadding(10)
-        .scale(myColor);
+        .scale(myColorB);
 
     svg_b.select(".legend")
         .call(legend);

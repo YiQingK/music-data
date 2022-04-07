@@ -17,15 +17,15 @@ var container_u = svg_u.append("g")
     .attr("transform","translate(" + 100 + "," + 100 +")");
 
 /*Scale for axes*/
-var yScale = d3.scaleLinear().range([height, 0]);
-var xScale = d3.scaleTime().range([0, width]);
+var yScaleU = d3.scaleLinear().range([height, 0]);
+var xScaleU = d3.scaleTime().range([0, width]);
 var myColor = d3.scaleOrdinal().range(['#e41a1c','#4daf4a']);
 
 d3.csv("users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date), type: d.type, number: +d.number,}})
     .then(function (data)
     {
-        yScale.domain(d3.extent(data,function (d){return +d.number;}));
-        xScale.domain(d3.extent(data,function (d){return d.date;}));
+        yScaleU.domain(d3.extent(data,function (d){return +d.number;}));
+        xScaleU.domain(d3.extent(data,function (d){return d.date;}));
         myColor.domain(['apple','spotify']);
 
         const sumstat = d3.group(data,d=>d.type);
@@ -33,7 +33,7 @@ d3.csv("users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date),
         /*X axis*/
         container_u.append("g")
             .attr("transform", "translate(0, " + height + ")")
-            .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat("20%y")))
+            .call(d3.axisBottom(xScaleU).tickFormat(d3.timeFormat("20%y")))
             .append("text")
             .attr("x",350)
             .attr("y",50)
@@ -42,12 +42,12 @@ d3.csv("users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date),
 
         /*Y-axis gridline*/
         container_u.append("g")
-            .call(d3.axisLeft(yScale).tickSize(-width).tickFormat(""))
+            .call(d3.axisLeft(yScaleU).tickSize(-width).tickFormat(""))
             .attr("stroke-opacity",0.1)
 
         /*Y-axis*/
         container_u.append("g")
-            .call(d3.axisLeft(yScale))
+            .call(d3.axisLeft(yScaleU))
             .append("text")
             .attr("transform","rotate(-90)")
             .attr("y",0)
@@ -64,8 +64,8 @@ d3.csv("users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date),
             .attr("stroke-width", 2)
             .attr("d", function(d){
                 return d3.line()
-                    .x(function(d) { return xScale(d.date); })
-                    .y(function(d) { return yScale(+d.number); })
+                    .x(function(d) { return xScaleU(d.date); })
+                    .y(function(d) { return yScaleU(+d.number); })
                     (d[1])
             })
 
