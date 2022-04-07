@@ -8,7 +8,7 @@ var div = d3.select("#map").append("div")
 var svg = d3.select('#map').append('svg')
     .attr('width', width)
     .attr('height', height)
-    .attr("transform","translate(250,0)");
+    .attr("transform","translate(200,0)");
 
 var projection = d3.geoEquirectangular()
 
