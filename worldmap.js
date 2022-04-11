@@ -1,14 +1,16 @@
 var width = 900;
 var height = 700;
 
-var div = d3.select("#map").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
+
 
 var svg = d3.select('#map').append('svg')
     .attr('width', width)
     .attr('height', height)
     .attr("transform","translate(250,0)");
+
+var div = d3.select("#map").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
 var projection = d3.geoEquirectangular()
 
@@ -35,7 +37,6 @@ Promise.all([
         .attr("fill", "#69b3a2")
         .style("stroke", "#000")
         .attr("class", function (d) {return "Country"})
-        .style("opacity", .8)
         .on('mouseover', function (event, d) {
             div.transition().duration(200).style("opacity", 1);
             div.html(function(b) {
