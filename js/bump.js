@@ -20,7 +20,7 @@ var yScaleB = d3.scaleLinear().range([0,height-50]);
 var xScaleB = d3.scaleLinear().range([50, width]);
 var myColorB = d3.scaleOrdinal().range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00']);
 
-d3.csv(".g/data/bump.csv").then(function(data)
+d3.csv("./data/bump.csv").then(function(data)
 {
     xScaleB.domain(d3.extent(data,function(d){return +d.Week;}));
     yScaleB.domain(d3.extent(data,function(d){return +d.Position;}));
