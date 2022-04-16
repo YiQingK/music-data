@@ -21,7 +21,7 @@ var yScaleU = d3.scaleLinear().range([height, 0]);
 var xScaleU = d3.scaleTime().range([0, width]);
 var myColor = d3.scaleOrdinal().range(['#e41a1c','#4daf4a']);
 
-d3.csv("../data/users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date), type: d.type, number: +d.number,}})
+d3.csv("./data/users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date), type: d.type, number: +d.number,}})
     .then(function (data)
     {
         yScaleU.domain(d3.extent(data,function (d){return +d.number;}));

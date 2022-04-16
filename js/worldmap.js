@@ -15,8 +15,8 @@ var projection = d3.geoEquirectangular()
 const mapdata = new Map();
 // Load external data and boot
 Promise.all([
-    d3.json("../data/map.geojson"),
-    d3.csv("../data/map_data.csv", function(d) {
+    d3.json("./data/map.geojson"),
+    d3.csv("./data/map_data.csv", function(d) {
         mapdata.set(d.Country, d)
     })]).then(function(loadData) {
     let topo = loadData[0]
