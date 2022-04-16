@@ -20,7 +20,7 @@ var yScaleB = d3.scaleLinear().range([0,height-50]);
 var xScaleB = d3.scaleLinear().range([50, width]);
 var myColorB = d3.scaleOrdinal().range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00']);
 
-d3.csv("bump.csv").then(function(data)
+d3.csv("../data/bump.csv").then(function(data)
 {
     xScaleB.domain(d3.extent(data,function(d){return +d.Week;}));
     yScaleB.domain(d3.extent(data,function(d){return +d.Position;}));
@@ -48,6 +48,30 @@ d3.csv("bump.csv").then(function(data)
         .attr("dy","-5.1em")
         .attr("fill", "black")
         .text("Rank")
+
+    /*function hover(elem) {
+        // Add code here for 'hover'
+        var attrs = elem.srcElement.attributes;
+        let id = attrs['data-id'].value;
+        let path = city.select('#' + id);
+        if(path.attr('visibility')=='visible')
+        {
+            city.selectAll('.line').style("stroke","grey").attr("opacity",0.1);
+            path.style("stroke", d=>{return z(d.id)}).attr("opacity",1);
+        }
+    }
+
+    function exit(elem) {
+        var attrs = elem.srcElement.attributes;
+        let id = attrs['data-id'].value;
+        let path = city.select('#' + id);
+        if (path.attr('visibility') == 'hidden') {
+            return;
+        }
+        city.selectAll('.line').style('stroke', d => {
+            return z(d.id)
+        }).attr("opacity",0.85);
+    }*/
 
     container_b.selectAll(".line")
         .data(sumstat)
@@ -78,7 +102,9 @@ d3.csv("bump.csv").then(function(data)
     var legend = d3.legendColor()
         .shape("circle")
         .shapePadding(10)
-        .scale(myColorB);
+        .scale(myColorB)
+        .on("mouseover",hover)
+        .on('mouseout',exit);
 
     svg_b.select(".legend")
         .call(legend);

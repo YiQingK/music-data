@@ -1,3 +1,10 @@
-# music-data
+#Exploring music taste
 
-link: https://yiqingk.github.io/music-data/
+##Overview
+
+##Table Of Contents
+
+##Features
+
+##Link
+https://yiqingk.github.io/music-data/

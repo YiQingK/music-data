@@ -7,7 +7,7 @@ var svg_l = d3.select("#lollipop")
     .append("svg")
     .attr("width",canvasWidth)
     .attr("height",canvasHeight)
-    .attr("transform","translate(200,50)");
+    .attr("transform","translate(200,0)");
 
 var width = canvasWidth-margin;
 var height = canvasHeight-margin;
@@ -18,7 +18,7 @@ var x = d3.scaleLinear().range([0,width])
 var y = d3.scaleBand().range([height,0])
 
 
-d3.csv("./data/test_data.csv").then(function(data)
+d3.csv("../data/test_data.csv").then(function(data)
 {
     // sort data
     data.sort(function(b, a) {
