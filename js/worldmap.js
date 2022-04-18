@@ -50,9 +50,8 @@ Promise.all([
             div.html(function(b) {
                 var dataRow = mapdata.get(d.properties.name);
                 if (dataRow) {
-                    return d.properties.name+": "+dataRow.Singer + ", " + dataRow.Song;
+                    return d.properties.name+": "+dataRow.Song + " by " + dataRow.Singer;
                 } else {
-                    console.log("no dataRow", b);
                     return d.properties.name + ": No data.";
                 }
             })

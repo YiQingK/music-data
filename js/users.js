@@ -1,12 +1,12 @@
 var canvasWidth = 1000;
-var canvasHeight = 700;
-var margin = 300;
+var canvasHeight = 600;
+var margin = 100;
 
 /*Create SVG tag with specified width and height*/
 var svg_u = d3.select("#users").append("svg")
     .attr("width",canvasWidth)
     .attr("height",canvasHeight)
-    .attr("transform","translate(200,0)");
+    .attr("transform","translate(100,0)");
 
 /*Data to keep within margin*/
 var width = canvasWidth - margin;
@@ -14,7 +14,7 @@ var height = canvasHeight - margin;
 
 /*Container which graph will be inside of*/
 var container_u = svg_u.append("g")
-    .attr("transform","translate(" + 100 + "," + 100 +")");
+    .attr("transform","translate(" + 100 + "," + 10 +")");
 
 /*Scale for axes*/
 var yScaleU = d3.scaleLinear().range([height, 0]);
@@ -32,17 +32,17 @@ d3.csv("./data/users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d
 
         /*X axis*/
         container_u.append("g")
-            .attr("transform", "translate(0, " + height + ")")
+            .attr("transform", "translate(0, " + 500 + ")")
             .call(d3.axisBottom(xScaleU).tickFormat(d3.timeFormat("20%y")))
             .append("text")
-            .attr("x",350)
+            .attr("x",450)
             .attr("y",50)
             .attr("fill", "black")
             .text("Date")
 
         /*Y-axis gridline*/
         container_u.append("g")
-            .call(d3.axisLeft(yScaleU).tickSize(-width).tickFormat(""))
+            .call(d3.axisLeft(yScaleU).tickSize(-canvasWidth).tickFormat(""))
             .attr("stroke-opacity",0.1)
 
         /*Y-axis*/
@@ -53,8 +53,10 @@ d3.csv("./data/users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d
             .attr("y",0)
             .attr("x",-150)
             .attr("dy","-5.1em")
+            .attr("dx",-25)
             .attr("fill", "black")
             .text("Users in millions")
+            .style("font-size",15)
 
         container_u.selectAll(".line")
             .data(sumstat)
@@ -71,7 +73,7 @@ d3.csv("./data/users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d
 
         svg_u.append("g")
             .attr("class", "legend")
-            .attr("transform", "translate(850,100)");
+            .attr("transform", "translate(900,100)");
 
         var legend = d3.legendColor()
             .shape("line")

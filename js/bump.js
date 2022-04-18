@@ -1,19 +1,20 @@
 var canvasWidth = 1000;
-var canvasHeight = 700;
-var margin = 300;
+var canvasHeight = 500;
+var marginH = 100;
+var marginW = 300;
 
 var svg_b = d3.select("#bump")
     .append("svg")
     .attr("width",canvasWidth)
     .attr("height",canvasHeight)
-    .attr("transform","translate(200,50)");
+    .attr("transform","translate(200,0)");
 
-var width = canvasWidth-margin;
-var height = canvasHeight-margin;
+var width = canvasWidth-marginW;
+var height = canvasHeight-marginH;
 
 /*Container which graph will be inside of*/
 var container_b = svg_b.append("g")
-    .attr("transform","translate(" + 100 + "," + 100 +")");
+    .attr("transform","translate(" + 100 + "," + 50 +")");
 
 /*Scale for axes*/
 var yScaleB = d3.scaleLinear().range([0,height-50]);
@@ -49,8 +50,7 @@ d3.csv("./data/bump.csv").then(function(data)
         .attr("fill", "black")
         .text("Rank")
 
-    /*function hover(elem) {
-        // Add code here for 'hover'
+    function hover(elem) {
         var attrs = elem.srcElement.attributes;
         let id = attrs['data-id'].value;
         let path = city.select('#' + id);
@@ -71,7 +71,7 @@ d3.csv("./data/bump.csv").then(function(data)
         city.selectAll('.line').style('stroke', d => {
             return z(d.id)
         }).attr("opacity",0.85);
-    }*/
+    }
 
     container_b.selectAll(".line")
         .data(sumstat)
@@ -85,6 +85,7 @@ d3.csv("./data/bump.csv").then(function(data)
                 .y(function(d) { return yScaleB(+d.Position); })
                 (d[1])
         })
+
     container_b.append("g")
         .selectAll(".dot")
         .data(data)
@@ -103,8 +104,8 @@ d3.csv("./data/bump.csv").then(function(data)
         .shape("circle")
         .shapePadding(10)
         .scale(myColorB)
-        .on("mouseover",hover)
-        .on('mouseout',exit);
+        .on("cellover",function(d){console.log(d);})
+        .on('cellout',function(){console.log("test")});
 
     svg_b.select(".legend")
         .call(legend);
