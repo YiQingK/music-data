@@ -2,6 +2,7 @@ var canvasWidth = 1000;
 var canvasHeight = 500;
 var marginH = 100;
 var marginW = 200;
+var marginL = 180;
 
 var svg_l = d3.select("#lollipop")
     .append("svg")
@@ -114,7 +115,7 @@ d3.csv("./data/test_data.csv").then(function(data)
                 }
             }
             var emToPxRatio = parseInt(window.getComputedStyle(text._groups[0][0]).fontSize.slice(0,-2));
-            text.attr("transform", "translate(-" + (margin.left - 13) + ", -" + lineNumber/2 * lineHeight * emToPxRatio + ")");
+            text.attr("transform", "translate(-" + (marginL - 13) + ", -" + lineNumber/2 * lineHeight * emToPxRatio + ")");
             function calHyphen(word) {
                 tspan.text(word);
                 if (tspan.node().getComputedTextLength() > width) {

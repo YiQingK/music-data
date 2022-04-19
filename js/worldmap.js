@@ -19,7 +19,8 @@ Promise.all([
     d3.csv("./data/map_data.csv", function(d) {
         mapdata.set(d.Country, d)
     })]).then(function(loadData) {
-    let topo = loadData[0]
+    let topo = loadData[0];
+    let data1 = loadData[1];
 
     // Draw the map
     svg_m.append("g")
@@ -41,10 +42,16 @@ Promise.all([
             {
                 return "black";
             }
-            }
-            )
+        })
         .style("stroke", "#000")
         .attr("class", function (d) {return "Country"})
+        .on("click",function(event,d){
+            var dataRow = mapdata.get(d.properties.name);
+            if(dataRow)
+            {
+                window.open(dataRow.Link);
+            }
+        })
         .on('mouseover', function (event, d) {
             div.transition().duration(200).style("opacity", 1);
             div.html(function(b) {
@@ -58,7 +65,7 @@ Promise.all([
                 .style("left", (event.pageX + 5) + "px")
                 .style("top", (event.pageY - 550) + "px");
         })
-        .on("mouseout", function(d) {
+        .on('mouseout', function(d) {
             div.transition()
                 .duration(500)
                 .style("opacity", 0);
