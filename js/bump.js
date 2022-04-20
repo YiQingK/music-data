@@ -19,13 +19,13 @@ var container_b = svg_b.append("g")
 /*Scale for axes*/
 var yScaleB = d3.scaleLinear().range([0,height-50]);
 var xScaleB = d3.scaleLinear().range([50, width]);
-var myColorB = d3.scaleOrdinal().range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00']);
+var myColorB = d3.scaleOrdinal().range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffce30','#a65628','#f781bf']);
 
 d3.csv("./data/bump.csv").then(function(data)
 {
     xScaleB.domain(d3.extent(data,function(d){return +d.Week;}));
     yScaleB.domain(d3.extent(data,function(d){return +d.Position;}));
-    myColorB.domain(['Bad Bunny','Taylor Swift','The Weeknd','BTS','Drake']);
+    myColorB.domain(['Bad Bunny','Taylor Swift','The Weeknd','BTS','Drake','Justin Bieber','Ed Sheeran','Daddy Yankee']);
 
     const sumstat = d3.group(data,d=>d.Singer);
 
