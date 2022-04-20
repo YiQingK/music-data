@@ -51,50 +51,47 @@ d3.csv("./data/bump.csv").then(function(data)
         .text("Rank")
 
     function hover(elem) {
-        var attrs = elem.srcElement.attributes;
-        let id = attrs['data-id'].value;
-        let path = city.select('#' + id);
-        if(path.attr('visibility')=='visible')
-        {
-            city.selectAll('.line').style("stroke","grey").attr("opacity",0.1);
-            path.style("stroke", d=>{return z(d.id)}).attr("opacity",1);
-        }
+        var id = elem.srcElement.__data__.substring(0,3).toUpperCase();
+
+        container_b.selectAll('.line').attr("stroke","grey").attr("opacity",0.1);
+        container_b.selectAll('.dot').style("fill","grey").attr("opacity",0.1);
+        container_b.select('#'+id).attr('stroke', d => {return myColorB(d[0])}).attr("opacity",1);
+        container_b.selectAll('#'+id+'.dot').style('fill', d => {return myColorB(d.Singer)}).attr("opacity",1);
     }
 
     function exit(elem) {
-        var attrs = elem.srcElement.attributes;
-        let id = attrs['data-id'].value;
-        let path = city.select('#' + id);
-        if (path.attr('visibility') == 'hidden') {
-            return;
-        }
-        city.selectAll('.line').style('stroke', d => {
-            return z(d.id)
-        }).attr("opacity",0.85);
+        container_b.selectAll('.line').attr('stroke', d => {return myColorB(d[0])}).attr("opacity",1);
+        container_b.selectAll('.dot').style('fill', d => {return myColorB(d.Singer)}).attr("opacity",1);
     }
 
     container_b.selectAll(".line")
         .data(sumstat)
         .join("path")
+        .attr("class","line")
         .attr("fill", "none")
         .attr("stroke", function(d){ return myColorB(d[0]) })
-        .attr("stroke-width", 2)
+        .attr("stroke-width", 5)
         .attr("d", function(d){
             return d3.line()
                 .x(function(d) { return xScaleB(d.Week); })
                 .y(function(d) { return yScaleB(+d.Position); })
                 (d[1])
         })
+        .attr("id",function(d){return (d[0].substring(0,3).toUpperCase());})
+        .attr("opacity",1);
 
     container_b.append("g")
         .selectAll(".dot")
         .data(data)
         .enter()
         .append("circle")
+        .attr("class","dot")
+        .attr("id",function(d){return d.Singer.substring(0,3).toUpperCase();})
         .attr("cx",function(d){return xScaleB(d.Week);})
         .attr("cy",function(d){return yScaleB(d.Position);})
         .attr("r",10)
         .style("fill",function(d){return myColorB(d.Singer);})
+        .attr("opacity",1);
 
     svg_b.append("g")
         .attr("class", "legend")
@@ -104,8 +101,8 @@ d3.csv("./data/bump.csv").then(function(data)
         .shape("circle")
         .shapePadding(10)
         .scale(myColorB)
-        .on("cellover",function(d){console.log(d);})
-        .on('cellout',function(){console.log("test")});
+        .on("cellover",hover)
+        .on('cellout',exit);
 
     svg_b.select(".legend")
         .call(legend);

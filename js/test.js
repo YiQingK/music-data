@@ -1,61 +1,115 @@
-var width = 900;
-var height = 700;
+var canvasWidth = 1000;
+var canvasHeight = 500;
+var marginH = 100;
+var marginW = 300;
 
-var div = d3.select("#map").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
-
-var svg = d3.select('#map').append('svg')
-    .attr('width', width)
-    .attr('height', height)
+var svg_b = d3.select("#bump")
+    .append("svg")
+    .attr("width",canvasWidth)
+    .attr("height",canvasHeight)
     .attr("transform","translate(200,0)");
 
-var projection = d3.geoEquirectangular()
+var width = canvasWidth-marginW;
+var height = canvasHeight-marginH;
 
-const mapdata = new Map();
-// Load external data and boot
-Promise.all([
-    d3.json("map.geojson"),
-    d3.csv("map_data.csv", function(d) {
-        mapdata.set(d.Country, d)
-    })]).then(function(loadData) {
-    let topo = loadData[0]
+/*Container which graph will be inside of*/
+var container_b = svg_b.append("g")
+    .attr("transform","translate(" + 100 + "," + 50 +")");
 
-    // Draw the map
-    svg.append("g")
-        .selectAll("path")
-        .data(topo.features)
+/*Scale for axes*/
+var yScaleB = d3.scaleLinear().range([0,height-50]);
+var xScaleB = d3.scaleLinear().range([50, width]);
+var myColorB = d3.scaleOrdinal().range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00']);
+
+d3.csv("./data/bump.csv").then(function(data)
+{
+    xScaleB.domain(d3.extent(data,function(d){return +d.Week;}));
+    yScaleB.domain(d3.extent(data,function(d){return +d.Position;}));
+    myColorB.domain(['Bad Bunny','Taylor Swift','The Weeknd','BTS','Drake']);
+
+    const sumstat = d3.group(data,d=>d.Singer);
+
+    /*X axis*/
+    container_b.append("g")
+        .attr("transform", "translate(0, " + height + ")")
+        .call(d3.axisBottom(xScaleB).ticks(5))
+        .append("text")
+        .attr("x",350)
+        .attr("y",50)
+        .attr("fill", "black")
+        .text("Week")
+
+    /*Y-axis*/
+    container_b.append("g")
+        .call(d3.axisLeft(yScaleB).ticks(5))
+        .append("text")
+        .attr("transform","rotate(-90)")
+        .attr("y",0)
+        .attr("x",-150)
+        .attr("dy","-5.1em")
+        .attr("fill", "black")
+        .text("Rank")
+
+    function hover(elem) {
+        var id = elem.srcElement.__data__;
+        let path = container_b.select('#'+id);
+        if(path.attr('visibility')=='visible')
+        {
+            container_b.selectAll('.line').style("stroke","grey").attr("opacity",0.1);
+            path.style("stroke", d=>{return z(d.id)}).attr("opacity",1);
+        }
+    }
+
+    function exit(elem) {
+        var attrs = elem.srcElement.attributes;
+        let id = attrs['data-id'].value;
+        let path = container_b.select('#' + id);
+        if (path.attr('visibility') == 'hidden') {
+            return;
+        }
+        container_b.selectAll('.line').style('stroke', d => {
+            return z(d.id)
+        }).attr("opacity",0.85);
+    }
+
+    container_b.selectAll(".line")
+        .data(sumstat)
+        .join("path")
+        .attr("fill", "none")
+        .attr("stroke", function(d){ return myColorB(d[0]) })
+        .attr("stroke-width", 5)
+        .attr("d", function(d){
+            return d3.line()
+                .x(function(d) { return xScaleB(d.Week); })
+                .y(function(d) { return yScaleB(+d.Position); })
+                (d[1])
+        })
+        .attr("id",function(d){return (d[0]);})
+        .attr("data-id",function(d){return (d[0]);})
+
+    container_b.append("g")
+        .selectAll(".dot")
+        .data(data)
         .enter()
-        .append("path")
-        // draw each country
-        .attr("d", d3.geoPath()
-            .projection(projection)
-        )
-        // set the color of each country
-        .attr("fill", "#69b3a2")
-        .style("stroke", "#000")
-        .attr("class", function (d) {return "Country"})
-        .style("opacity", .8)
-        .on('mouseover', function (event, d) {
-            div.transition().duration(200).style("opacity", 1);
-            div.html(function(b) {
-                var dataRow = mapdata.get(d.properties.name);
-                if (dataRow) {
-                    console.log(dataRow);
-                    return d.properties.name+": "+dataRow.Singer + ", " + dataRow.Song;
-                } else {
-                    console.log("no dataRow", b);
-                    return d.properties.name + ": No data.";
-                }
-            })
-                .style("left", (event.pageX + 30) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        })
-        .on("mouseout", function(d) {
-            div.transition()
-                .duration(500)
-                .style("opacity", 0);
-        })
+        .append("circle")
+        .attr("id",function(d){return d.Singer;})
+        .attr("data-id",function(d){return d.Singer;})
+        .attr("cx",function(d){return xScaleB(d.Week);})
+        .attr("cy",function(d){return yScaleB(d.Position);})
+        .attr("r",10)
+        .style("fill",function(d){return myColorB(d.Singer);})
 
+    svg_b.append("g")
+        .attr("class", "legend")
+        .attr("transform", "translate(850,100)");
+
+    var legend = d3.legendColor()
+        .shape("circle")
+        .shapePadding(10)
+        .scale(myColorB)
+        .on("cellover",hover)
+        .on('cellout',function(){console.log("test")});
+
+    svg_b.select(".legend")
+        .call(legend);
 })
-
