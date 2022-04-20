@@ -115,7 +115,7 @@ d3.csv("./data/test_data.csv").then(function(data)
                 }
             }
             var emToPxRatio = parseInt(window.getComputedStyle(text._groups[0][0]).fontSize.slice(0,-2));
-            text.attr("transform", "translate(-" + (marginL - 13) + ", -" + lineNumber/2 * lineHeight * emToPxRatio + ")");
+            text.attr("transform", "translate(-" + (marginL - 175) + ", -" + lineNumber/2 * lineHeight * emToPxRatio + ")");
             function calHyphen(word) {
                 tspan.text(word);
                 if (tspan.node().getComputedTextLength() > width) {
