@@ -4,11 +4,14 @@ var marginH = 100;
 var marginW = 200;
 var marginL = 180;
 
-var svg_l = d3.select("#lollipop")
+var svg_l = d3.select("div#lollipop")
     .append("svg")
-    .attr("width",canvasWidth)
-    .attr("height",canvasHeight)
-    .attr("transform","translate(100,0)");
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 1000 500");
+
+var div = d3.select("div#lollipop").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
 
 var width = canvasWidth-marginW;
 var height = canvasHeight-marginH;
@@ -70,8 +73,8 @@ d3.csv("./data/test_data.csv").then(function(data)
         .on('mouseover',function (event, d) {
             div.transition().duration(200).style("opacity", 1);
             div.html(function(b){return formatNum(d.streams)})
-                .style("left", (event.pageX + 5) + "px")
-                .style("top", (event.pageY - 550) + "px");
+                .style("left", (event.pageX) + "px")
+                .style("top", (event.pageY) + "px");
         })
         .on("mouseout", function(d) {
             div.transition()

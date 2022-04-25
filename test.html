@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="test.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
+
+</head>
+<body style="background-color:DarkSeaGreen">
+
+<ul class="topnav">
+    <li><a href="#Home">Home</a></li>
+    <li><a href="#About">About</a></li>
+    <li><a href="#Contact">Contact</a></li>
+</ul>
+<div class="box">
+    <h1>About the project</h1>
+    <p>Noticing the differences in music taste between my friends and I, I decided to use this project as an opportunity to look into the differences in music taste, comparing amongst different countries as well as seeing if there are trends to a song or artist's popularity.</p>
+</div>
+<div class="right">
+    <p>My song reccomendation</p>
+</div>
+<div class="box">
+    <h1 class="h1">Spotify vs Apple Music</h1>
+    <div class="container" id="users">
+        <script src="./js/users.js"></script>
+    </div>
+</div>
+<div class="box">
+    <p>From this line chart, we can see that spotify has a much higher user count and therefore should be the platform data should be taken and compared from.</p>
+</div>
+<div class="box">
+    <h1 class="h1">Highest Streaming Songs (Global)</h1>
+    <div class="container" id="lollipop">
+        <script src="./js/lollipop.js"></script>
+    </div>
+</div>
+<div class="box">
+    <h1 class="h1">World Map</h1>
+    <p>Place your mouse over <span style="color: #69b3a2;font-weight: bold">colored countries</span> to check out what song is in the top of the charts.
+        Streaming data is not available for <span style="font-weight: bold">blacked-out countries</span>.
+        Feel free to click on the countries to check out the songs.
+        You are also able to zoom-in to look at smaller countries</p>
+    <div class="container" id="map">
+        <script src="./js/worldmap.js"></script>
+    </div>
+</div>
+
+
+</body>
+</html>

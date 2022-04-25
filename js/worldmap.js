@@ -2,15 +2,17 @@ var width = 900;
 var height = 700;
 
 var svg_m = d3.select('#map').append('svg')
-    .attr('width', width)
-    .attr('height', height)
-    .attr("transform","translate(200,0)");
+    //.attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 900 700");
 
 var div = d3.select("#map").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-var projection = d3.geoEquirectangular()
+var projection = d3.geoEquirectangular();
+
+var path = d3.geoPath()
+    .projection(projection);
 
 const mapdata = new Map();
 // Load external data and boot
@@ -29,8 +31,7 @@ Promise.all([
         .enter()
         .append("path")
         // draw each country
-        .attr("d", d3.geoPath()
-            .projection(projection)
+        .attr("d", path
         )
         // set the color of each country
         .attr("fill", function(d){
@@ -58,18 +59,26 @@ Promise.all([
                 var dataRow = mapdata.get(d.properties.name);
                 if (dataRow) {
                     return d.properties.name+": "+dataRow.Song + " by " + dataRow.Singer;
-                } else {
-                    return d.properties.name + ": No data.";
                 }
             })
-                .style("left", (event.pageX + 5) + "px")
-                .style("top", (event.pageY - 550) + "px");
+                .style("left", (event.pageX) + "px")
+                .style("top", (event.pageY) + "px");
         })
         .on('mouseout', function(d) {
             div.transition()
                 .duration(500)
                 .style("opacity", 0);
         })
+
+    // zoom and pan
+    var zoom = d3.zoom()
+        .scaleExtent([1, 8])
+        .on('zoom', function(event) {
+            svg_m.selectAll('path')
+                .attr('transform', event.transform);
+        });
+
+    svg_m.call(zoom)
 
 })
 

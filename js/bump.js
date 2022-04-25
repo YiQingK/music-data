@@ -53,15 +53,15 @@ d3.csv("./data/bump.csv").then(function(data)
     function hover(elem) {
         var id = elem.srcElement.__data__.substring(0,3).toUpperCase();
 
-        container_b.selectAll('.line').attr("stroke","grey").attr("opacity",0.1);
-        container_b.selectAll('.dot').style("fill","grey").attr("opacity",0.1);
-        container_b.select('#'+id).attr('stroke', d => {return myColorB(d[0])}).attr("opacity",1);
-        container_b.selectAll('#'+id+'.dot').style('fill', d => {return myColorB(d.Singer)}).attr("opacity",1);
+        container_b.selectAll('.line').attr("stroke","grey");
+        container_b.selectAll('.dot').style("fill","grey");
+        container_b.select('#'+id).attr('stroke', d => {return myColorB(d[0])});
+        container_b.selectAll('#'+id+'.dot').style('fill', d => {return myColorB(d.Singer)});
     }
 
     function exit(elem) {
-        container_b.selectAll('.line').attr('stroke', d => {return myColorB(d[0])}).attr("opacity",1);
-        container_b.selectAll('.dot').style('fill', d => {return myColorB(d.Singer)}).attr("opacity",1);
+        container_b.selectAll('.line').attr('stroke', d => {return myColorB(d[0])});
+        container_b.selectAll('.dot').style('fill', d => {return myColorB(d.Singer)});
     }
 
     container_b.selectAll(".line")
@@ -77,8 +77,7 @@ d3.csv("./data/bump.csv").then(function(data)
                 .y(function(d) { return yScaleB(+d.Position); })
                 (d[1])
         })
-        .attr("id",function(d){return (d[0].substring(0,3).toUpperCase());})
-        .attr("opacity",1);
+        .attr("id",function(d){return (d[0].substring(0,3).toUpperCase());});
 
     container_b.append("g")
         .selectAll(".dot")
@@ -90,8 +89,7 @@ d3.csv("./data/bump.csv").then(function(data)
         .attr("cx",function(d){return xScaleB(d.Week);})
         .attr("cy",function(d){return yScaleB(d.Position);})
         .attr("r",10)
-        .style("fill",function(d){return myColorB(d.Singer);})
-        .attr("opacity",1);
+        .style("fill",function(d){return myColorB(d.Singer);});
 
     svg_b.append("g")
         .attr("class", "legend")

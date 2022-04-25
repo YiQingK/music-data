@@ -3,10 +3,9 @@ var canvasHeight = 600;
 var margin = 100;
 
 /*Create SVG tag with specified width and height*/
-var svg_u = d3.select("#users").append("svg")
-    .attr("width",canvasWidth)
-    .attr("height",canvasHeight)
-    .attr("transform","translate(100,0)");
+var svg_u = d3.select("div#users").append("svg")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 1000 600");
 
 /*Data to keep within margin*/
 var width = canvasWidth - margin;
@@ -19,14 +18,14 @@ var container_u = svg_u.append("g")
 /*Scale for axes*/
 var yScaleU = d3.scaleLinear().range([height, 0]);
 var xScaleU = d3.scaleTime().range([0, width]);
-var myColor = d3.scaleOrdinal().range(['#e41a1c','#4daf4a']);
+var myColor = d3.scaleOrdinal().range(['#4daf4a','#e41a1c']);
 
 d3.csv("./data/users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date), type: d.type, number: +d.number,}})
     .then(function (data)
     {
         yScaleU.domain(d3.extent(data,function (d){return +d.number;}));
         xScaleU.domain(d3.extent(data,function (d){return d.date;}));
-        myColor.domain(['apple','spotify']);
+        myColor.domain(['spotify','apple']);
 
         const sumstat = d3.group(data,d=>d.type);
 
@@ -72,14 +71,15 @@ d3.csv("./data/users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d
             })
 
         svg_u.append("g")
-            .attr("class", "legend")
-            .attr("transform", "translate(900,100)");
+            .attr("class", "legendOrdinal")
+            .attr("transform", "translate(10,530)");
 
         var legend = d3.legendColor()
-            .shape("line")
-            .shapePadding(10)
-            .scale(myColor);
+            .title("legend")
+            .orient("Horizontal")
+            .scale(myColor)
+            .shapePadding(30);
 
-        svg_u.select(".legend")
+        svg_u.select(".legendOrdinal")
             .call(legend);
     });
