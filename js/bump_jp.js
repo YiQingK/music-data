@@ -5,9 +5,7 @@ var marginW = 300;
 
 var svg_b_j = d3.select("#bump_jp")
     .append("svg")
-    .attr("width",canvasWidth)
-    .attr("height",canvasHeight)
-    .attr("transform","translate(200,0)");
+    .attr("viewBox", "0 0 1000 500");
 
 var width = canvasWidth-marginW;
 var height = canvasHeight-marginH;
@@ -19,13 +17,13 @@ var container_b_j = svg_b_j.append("g")
 /*Scale for axes*/
 var yScaleB_J = d3.scaleLinear().range([0,height-50]);
 var xScaleB_J = d3.scaleLinear().range([50, width]);
-var myColorB_J = d3.scaleOrdinal().range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#a65628']);
+var myColorB_J = d3.scaleOrdinal().range(['#984ea3','#ff6699','#ffcc66','#ff3300','#000099','#00cc99']);
 
 d3.csv("./data/bump_jp.csv").then(function(data)
 {
     xScaleB_J.domain(d3.extent(data,function(d){return +d.Week;}));
     yScaleB_J.domain(d3.extent(data,function(d){return +d.Position;}));
-    myColorB_J.domain(['BTS','YOASOBI','Vaundy','Yuuri','King GNU','Official HIGE DANdism']);
+    myColorB_J.domain(['BTS','YOASOBI','King GNU','Vaundy','Yuuri','Official HIGE DANdism']);
 
     const sumstat = d3.group(data,d=>d.Singer);
 
@@ -100,7 +98,7 @@ d3.csv("./data/bump_jp.csv").then(function(data)
     var legend = d3.legendColor()
         .shape("circle")
         .shapePadding(10)
-        .labelWrap(30)
+        .labelWrap(100)
         .scale(myColorB_J)
         .on("cellover",hover)
         .on('cellout',exit);

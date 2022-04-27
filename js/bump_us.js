@@ -5,9 +5,7 @@ var marginW = 300;
 
 var svg_b_u = d3.select("#bump_us")
     .append("svg")
-    .attr("width",canvasWidth)
-    .attr("height",canvasHeight)
-    .attr("transform","translate(200,0)");
+    .attr("viewBox", "0 0 1000 500");
 
 var width = canvasWidth-marginW;
 var height = canvasHeight-marginH;
@@ -19,7 +17,7 @@ var container_b_u = svg_b_u.append("g")
 /*Scale for axes*/
 var yScaleB_U = d3.scaleLinear().range([0,height-50]);
 var xScaleB_U = d3.scaleLinear().range([50, width]);
-var myColorB_U = d3.scaleOrdinal().range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#a65628']);
+var myColorB_U = d3.scaleOrdinal().range(['#e41a1c','#ff7f00','#006600','#377eb8','#990099','#a65628']);
 
 d3.csv("./data/bump_us.csv").then(function(data)
 {
@@ -100,7 +98,6 @@ d3.csv("./data/bump_us.csv").then(function(data)
     var legend = d3.legendColor()
         .shape("circle")
         .shapePadding(10)
-        .labelWrap(30)
         .scale(myColorB_U)
         .on("cellover",hover)
         .on('cellout',exit);

@@ -1,9 +1,9 @@
-var width = 900;
-var height = 700;
+var width = 975;
+var height = 500;
 
 var svg_m = d3.select('#map').append('svg')
     //.attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", "0 0 900 700");
+    .attr("viewBox", "0 0 975 500");
 
 var div = d3.select("#map").append("div")
     .attr("class", "tooltip")
