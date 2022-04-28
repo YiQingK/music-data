@@ -1,136 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>CS360 Project</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<link rel="stylesheet" href="style.css">
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="test.css">
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
-	<script src="https://kit.fontawesome.com/c28ff2363a.js" crossorigin="anonymous"></script>
-	<style>
-		.snapcontainer {
-			scroll-snap-type: y mandatory;
-		}
-
-		.snapchild {
-			scroll-snap-align: start;
-		}
-	</style>
-
 
 </head>
-<body>
-	<!-- Links (sit on top) -->
-	<div class="w3-top">
-	  <div class="w3-row w3-padding w3-black">
-	    <div class="w3-col s3">
-	      <a href="#" class="w3-button w3-block w3-black">HOME</a>
-	    </div>
-	    <div class="w3-col s3">
-	      <a href="#about" class="w3-button w3-block w3-black">ABOUT</a>
-	    </div>
-	    <div class="w3-col s3">
-	      <a href="#users" class="w3-button w3-block w3-black">DATA</a>
-	    </div>
-	    <div class="w3-col s3">
-	      <a href="pdf/AlphaRelease.pdf" class="w3-button w3-block w3-black">ALPHA RELEASE</a>
-	    </div>
-	  </div>
+<body style="background-color:DarkSeaGreen; scroll-snap-type: y mandatory">
+
+<ul class="topnav">
+	<li><a href="#Home">Home</a></li>
+	<li><a href="#About">About</a></li>
+	<li><a href="#Contact">Contact</a></li>
+</ul>
+<div class="box">
+	<h1>About the project</h1>
+	<p>Noticing the differences in music taste between my friends and I, I decided to use this project as an opportunity to look into the differences in music taste, comparing amongst different countries as well as seeing if there are trends to a song or artist's popularity.</p>
+</div>
+<!--
+<div class="right">
+    <p>SONG RECOMMENDATION</p>
+    <img style="width:100%" src="images/rec3.webp"/>
+    <a href="https://open.spotify.com/track/4mIMD1yJGamtSx2c4Txn0a?si=SVPZBYPqREy1bhcoZs9IQw">Click here to check it out</a>
+</div>-->
+
+<div class="box">
+	<h1 class="h1">Spotify vs Apple Music</h1>
+	<div class="container" id="users">
+		<script src="./js/users.js"></script>
 	</div>
-	<!-- Header with image -->
-	<header class=" bgimg w3-display-container w3-grayscale-min" id="home">
-	  <div class="w3-display-middle w3-center">
-	    <span class="w3-text-white" style="font-size:90px">CS360 Project<br></span>
-		  <span class="w3-text-white" style="font-size:60px">Exploring Music Taste<br></span>
-	    <span class="w3-text-white" style="font-size:30px">By: Yi Qing Khoo</span>
-	  </div>
-	</header>
-
-	<!-- Add a background color and large text to the whole page -->
-	<div class="w3-sand w3-grayscale-min w3-large snapcontainer">
-
-	<!-- About Container -->
-	<div class="w3-container snapchild" id="about">
-	  <div class="w3-content" style="max-width:900px">
-	    <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">ABOUT THE PROJECT</span></h5>
-	    <p style="text-align: center">Noticing the differences in music taste between my friends and I, I decided to use this project as an opportunity to look into the differences in music taste, comparing amongst different countries as well as seeing if there are trends to a song or artist's popularity.</p>
-	  </div>
+</div>
+<div class="box">
+	<p>From this line chart, we can see that spotify has a much higher user count and therefore should be the platform data should be taken and compared from.</p>
+</div>
+<!--
+<div class="left">
+    <p>SONG RECOMMENDATION</p>
+    <img style="width: 100%" src="images/rec2.png">
+    <a href="https://open.spotify.com/track/5ZQFP6rsYhNaFuQNaoTzgV?si=PEjJtZFeQomNXBnv2mSRhA">Click here to check it out</a>
+</div>
+-->
+<div class="box">
+	<h1 class="h1">Highest Streaming Songs (Global)</h1>
+	<div class="container" id="lollipop">
+		<script src="./js/lollipop.js"></script>
 	</div>
-
-	<!-- Users Container -->
-	<div class="w3-container snapchild" id="users">
-			<div class="users">
-				<h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Which music streaming site has more users?</span></h5>
-				<script src="./js/users.js"></script>
-			</div>
-		<div class="w3-content" style="max-width:900px">
-		<p style="text-align: center">From this line chart, we can see that spotify has a much higher user count and therefore should be the platform data should be taken and compared from. </p>
-			</div>
+</div>
+<div class="box">
+	<h1 class="h1">World Map</h1>
+	<p>Place your mouse over <span style="color: #69b3a2;font-weight: bold">colored countries</span> to check out what song is in the top of the charts.
+		Streaming data is not available for <span style="font-weight: bold">blacked-out countries</span>.
+		Feel free to click on the countries to check out the songs.
+		You are also able to zoom-in to look at smaller countries</p>
+	<div class="container" id="map">
+		<script src="./js/worldmap.js"></script>
 	</div>
-		<!-- Data Container -->
-		<div class="w3-container snapchild" id="lollipop">
-			<div class="lollipop">
-				<h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Highest Streaming Songs (Global)</span></h5>
-				<script src="js/lollipop.js"></script>
-			</div>
-			<div class="w3-content" style="max-width:700px">
-			</div>
-		</div>
+</div>
 
-		<div class="w3-container snapchild" id="map">
-			<div class="w3-content" style="max-width:900px">
-				<h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">World Map: Week of April 7</span></h5>
-				<p style="text-align: center">Place your mouse over colored countries to check out what song is in the top of the charts</p>
-				<p style="text-align: center">Streaming data is not available for blacked-out countries</p>
-				<p style="text-align: center">Feel free to click on the countries to check out the songs</p>
+<section class="right">
+	<p>SONG RECOMMENDATION</p>
+	<img style="width:100%" src="images/rec4.jpeg">
+	</img>
+	<a href="https://open.spotify.com/track/3ROII5AGBGpehdt7yN7VwD?si=KkYYBSQJS8yZkS5MVQkmXQ">Click here to check it out</a>
+</section>
 
-			</div>
-			<div class="map">
-				<script src="./js/worldmap.js"></script>
-			</div>
-		</div>
+<div class="box">
+	<p>Bump Charts</p>
+</div>
 
-		<div class="w3-container snapchild;" id="bump">
-			<h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Top 5 Singers Weekly Bump Chart (Week of March 17 - April 14)</span></h5>
-			<div class="bump">
-				<script src="./js/bump.js"></script>
-				<p style="text-align: center">Global</p>
-			</div>
-		</div>
-		<div class="w3-container snapchild" id="bump_jp">
-			<div class="bump_jp">
-				<p style="text-align: center">Japan</p>
-				<script src="./js/bump_jp.js"></script>
-			</div>
-		</div>
-		<div class="w3-container snapchild" id="bump_us">
-			<div class="bump_us">
-				<p style="text-align: center">USA</p>
-				<script src="./js/bump_us.js"></script>
-			</div>
-		</div>
-
-
-		<div class="w3-container snapchild" id="contact">
-			<div class="contact">
-				<h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">Contact</span></h5>
-			</div>
-		</div>
-
+<div class="box">
+	<h1 class="h1">Global</h1>
+	<div class="container" id="bump">
+		<script src="./js/bump.js"></script>
 	</div>
-	<footer class="w3-center w3-light-grey w3-padding-48 w3-large">
-		<a href="#home" class="w3-button w3-light-grey"><i class="fa-solid fa-arrow-up w3-margin-right"></i>To the top</a>
+</div>
+<div class="box">
+	<h1 class="h1">Japan</h1>
+	<div class="container" id="bump_jp">
+		<script src="./js/bump_jp.js"></script>
+	</div>
+</div>
+<div class="box">
+	<h1 class="h1">USA</h1>
+	<div class="container" id="bump_us">
+		<script src="./js/bump_us.js"></script>
+	</div>
+</div>
 
-		<div class>
-			<i class="fa-brands fa-instagram w3-hover-opacity"></i>
-			<i class="fa-brands fa-twitter w3-hover-opacity"></i>
-			<i class="fa-brands fa-linkedin w3-hover-opacity"></i>
-			<i class="fa-solid fa-envelope w3-hover-opacity"></i>
-		</div>
-		<p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
-	</footer>
+
 </body>
 </html>
