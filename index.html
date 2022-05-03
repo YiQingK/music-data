@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="test.css">
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
+	<script src="https://unpkg.com/d3-simple-slider"></script>
 
 </head>
 <body style="background-color:DarkSeaGreen; scroll-snap-type: y mandatory">
@@ -42,10 +43,13 @@
 </div>
 -->
 <div class="box">
-	<h1 class="h1">Highest Streaming Songs (Global)</h1>
+	<h1 class="h1">Top 10 highest streaming songs (Week of April 28)</h1>
 	<div class="container" id="lollipop">
+		<div><p id="value-time"></p></div>
+		<div><div id="slider-time"></div></div>
 		<script src="./js/lollipop.js"></script>
 	</div>
+
 </div>
 <div class="box">
 	<h1 class="h1">World Map</h1>
@@ -58,15 +62,17 @@
 	</div>
 </div>
 
+<!--
 <section class="right">
 	<p>SONG RECOMMENDATION</p>
 	<img style="width:100%" src="images/rec4.jpeg">
 	</img>
 	<a href="https://open.spotify.com/track/3ROII5AGBGpehdt7yN7VwD?si=KkYYBSQJS8yZkS5MVQkmXQ">Click here to check it out</a>
 </section>
+-->
 
 <div class="box">
-	<p>Bump Charts</p>
+	<h1 class="h1">Bump Charts</h1>
 </div>
 
 <div class="box">
@@ -87,7 +93,6 @@
 		<script src="./js/bump_us.js"></script>
 	</div>
 </div>
-
 
 </body>
 </html>

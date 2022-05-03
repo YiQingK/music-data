@@ -1,6 +1,6 @@
 var canvasWidth = 1000;
 var canvasHeight = 600;
-var margin = 100;
+var margin = 150;
 
 /*Create SVG tag with specified width and height*/
 var svg_u = d3.select("div#users").append("svg")
@@ -17,27 +17,29 @@ var container_u = svg_u.append("g")
 
 /*Scale for axes*/
 var yScaleU = d3.scaleLinear().range([height, 0]);
-var xScaleU = d3.scaleTime().range([0, width]);
+var xScaleU = d3.scaleLinear().range([0, width]);
 var myColor = d3.scaleOrdinal().range(['#4daf4a','#e41a1c']);
 
-d3.csv("./data/users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date), type: d.type, number: +d.number,}})
+d3.csv("./data/user_data.csv",/*function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date), type: d.type, number: +d.number,}}*/)
     .then(function (data)
     {
-        yScaleU.domain(d3.extent(data,function (d){return +d.number;}));
-        xScaleU.domain(d3.extent(data,function (d){return d.date;}));
+        yScaleU.domain([0,165]);
+        xScaleU.domain(['2016','2021']);
         myColor.domain(['spotify','apple']);
 
         const sumstat = d3.group(data,d=>d.type);
 
         /*X axis*/
         container_u.append("g")
+            .style("font-size","25px")
             .attr("transform", "translate(0, " + 500 + ")")
-            .call(d3.axisBottom(xScaleU).tickFormat(d3.timeFormat("20%y")))
+            .call(d3.axisBottom(xScaleU).tickFormat(d3.format("d")).ticks(6))
             .append("text")
             .attr("x",450)
             .attr("y",50)
             .attr("fill", "black")
             .text("Date")
+            .attr("font-size",25)
 
         /*Y-axis gridline*/
         container_u.append("g")
@@ -46,16 +48,17 @@ d3.csv("./data/users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d
 
         /*Y-axis*/
         container_u.append("g")
+            .style("font-size","25px")
             .call(d3.axisLeft(yScaleU))
             .append("text")
             .attr("transform","rotate(-90)")
-            .attr("y",0)
+            .attr("y",40)
             .attr("x",-150)
             .attr("dy","-5.1em")
             .attr("dx",-25)
             .attr("fill", "black")
             .text("Users in millions")
-            .style("font-size",15)
+            .attr("font-size",20)
 
         container_u.selectAll(".line")
             .data(sumstat)
@@ -70,16 +73,17 @@ d3.csv("./data/users.csv",function (d) {return {date: d3.timeParse("%m/%d/%Y")(d
                     (d[1])
             })
 
-        svg_u.append("g")
-            .attr("class", "legendOrdinal")
-            .attr("transform", "translate(10,530)");
+        container_u.append("text")
+            .attr("font-size",20)
+            .attr("font-weight","bold")
+            .attr("fill",'#4daf4a')
+            .attr("transform","translate(835,30)")
+            .text("Spotify")
 
-        var legend = d3.legendColor()
-            .title("legend")
-            .orient("Horizontal")
-            .scale(myColor)
-            .shapePadding(30);
-
-        svg_u.select(".legendOrdinal")
-            .call(legend);
+        container_u.append("text")
+            .attr("font-size",20)
+            .attr("font-weight","bold")
+            .attr("fill",'#e41a1c')
+            .attr("transform","translate(790,250)")
+            .text("Apple Music")
     });

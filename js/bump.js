@@ -49,7 +49,7 @@ d3.csv("./data/bump.csv").then(function(data)
         .text("Rank")
 
     function hover(elem) {
-        var id = elem.srcElement.__data__.substring(0,3).toUpperCase();
+        var id = elem.srcElement.__data__.substring(0,2).toUpperCase();
 
         container_b.selectAll('.line').attr("stroke","grey");
         container_b.selectAll('.dot').style("fill","grey");
@@ -75,7 +75,7 @@ d3.csv("./data/bump.csv").then(function(data)
                 .y(function(d) { return yScaleB(+d.Position); })
                 (d[1])
         })
-        .attr("id",function(d){return (d[0].substring(0,3).toUpperCase());});
+        .attr("id",function(d){return (d[0].substring(0,2).toUpperCase());});
 
     container_b.append("g")
         .selectAll(".dot")
@@ -83,7 +83,7 @@ d3.csv("./data/bump.csv").then(function(data)
         .enter()
         .append("circle")
         .attr("class","dot")
-        .attr("id",function(d){return d.Singer.substring(0,3).toUpperCase();})
+        .attr("id",function(d){return d.Singer.substring(0,2).toUpperCase();})
         .attr("cx",function(d){return xScaleB(d.Week);})
         .attr("cy",function(d){return yScaleB(d.Position);})
         .attr("r",10)
