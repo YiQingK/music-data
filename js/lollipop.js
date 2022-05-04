@@ -1,7 +1,7 @@
 var canvasWidth = 1000;
 var canvasHeight = 500;
 var marginH = 100;
-var marginW = 250;
+var marginW = 300;
 var marginL = 200;
 
 var svg_l = d3.select("div#lollipop")
@@ -16,17 +16,15 @@ var div = d3.select("div#lollipop").append("div")
 var width = canvasWidth-marginW;
 var height = canvasHeight-marginH;
 
-var container_l = svg_l.append("g").attr("transform","translate(100,0)");
+var container_l = svg_l.append("g")//.attr("transform","translate(100,0)");
 
 var x = d3.scaleLinear().range([0,width]);
 var xAxis = container_l.append("g")
-            .attr("transform", "translate(125, " + 400 + ")");
+            .attr("transform", "translate(250, 400)");
 
 var y = d3.scaleBand().range([400,0]);
 var yAxis = container_l.append("g")
-            .style("font-size",15)
-            .attr("class", "myYaxis");
-
+            .attr("transform","translate(250,0)");
 
 var formatNum = d3.format(",");
 
@@ -71,28 +69,26 @@ function updategraph(val){
         x.domain([15000000,d3.max(data, function (d){return +d.streams})]);
         xAxis.transition().duration(1000).call(d3.axisBottom(x).tickFormat(d3.format(".2s")))
             .selectAll("text")
-            .attr("transform","translate(15,5)")
-            .attr("font-size",20)
-            .style("text-anchor", "end");
+            .attr("font-size",20);
 
         y.domain(data.map(function(d){return d.track_name;}))
-        yAxis.transition().duration(1000)
-            .call(d3.axisLeft(y))
-            .attr("transform","translate(125,0)")
-            .selectAll(".tick text")
+        yAxis.call(d3.axisLeft(y))
+            .selectAll("text")
+            .attr("font-size",15)
             .call(wrapText, 225)
 
+        console.log(yAxis.selectAll(".tick text"));
 
         var l = container_l.selectAll(".myline")
             .data(data)
-        l
-            .enter()
+
+            l.enter()
             .append('line')
             .attr("class","myline")
             .merge(l)
             .transition()
             .duration(1000)
-                .attr("transform","translate(125,20)")
+                .attr("transform","translate(250,20)")
                 .attr("x1", function(d) { return x(d.streams); })
                 .attr("x2", x(15000000))
                 .attr("y1", function(d) { return y(d.track_name); })
@@ -102,8 +98,7 @@ function updategraph(val){
         var c = container_l.selectAll("circle")
             .data(data)
 
-        c
-            .enter()
+            c.enter()
             .append("circle")
             .on('mouseover',function (event, d) {
                 div.transition().duration(200).style("opacity", 1);
@@ -119,7 +114,7 @@ function updategraph(val){
             .merge(c)
             .transition()
             .duration(1000)
-                .attr("transform","translate(125,20)")
+                .attr("transform","translate(250,20)")
                 .attr("cx",function(d){return x(d.streams);})
                 .attr("cy",function(d){return y(d.track_name);})
                 .attr("r",7.5)
@@ -128,8 +123,8 @@ function updategraph(val){
 
 
         function wrapText(text, width) {
-            console.log("wrapping text...");
             text.each(function() {
+                console.log(d3.select(this));
                 var text = d3.select(this),
                     textContent = text.text(),
                     tempWord = addBreakSpace(textContent).split(/\s+/),
@@ -164,7 +159,7 @@ function updategraph(val){
                     }
                 }
                 var emToPxRatio = parseInt(window.getComputedStyle(text._groups[0][0]).fontSize.slice(0,-2));
-                text.attr("transform", "translate(-" + (marginL - 190) + ", -" + lineNumber/2 * lineHeight * emToPxRatio + ")");
+                text.attr("transform", "translate(-" + (marginL - 195) + ", -" + lineNumber/2 * lineHeight * emToPxRatio + ")");
                 function calHyphen(word) {
                     tspan.text(word);
                     if (tspan.node().getComputedTextLength() > width) {
