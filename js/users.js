@@ -35,10 +35,10 @@ d3.csv("./data/user_data.csv",/*function (d) {return {date: d3.timeParse("%m/%d/
             .attr("transform", "translate(0, " + 500 + ")")
             .call(d3.axisBottom(xScaleU).tickFormat(d3.format("d")).ticks(6))
             .append("text")
-            .attr("x",450)
+            .attr("x",425)
             .attr("y",50)
             .attr("fill", "black")
-            .text("Date")
+            .text("Year")
             .attr("font-size",25)
 
         /*Y-axis gridline*/
@@ -65,7 +65,7 @@ d3.csv("./data/user_data.csv",/*function (d) {return {date: d3.timeParse("%m/%d/
             .join("path")
             .attr("fill", "none")
             .attr("stroke", function(d){ return myColor(d[0]) })
-            .attr("stroke-width", 2)
+            .attr("stroke-width", 3)
             .attr("d", function(d){
                 return d3.line()
                     .x(function(d) { return xScaleU(d.date); })
@@ -74,16 +74,18 @@ d3.csv("./data/user_data.csv",/*function (d) {return {date: d3.timeParse("%m/%d/
             })
 
         container_u.append("text")
+            .attr("font-family","sans-serif")
             .attr("font-size",20)
             .attr("font-weight","bold")
             .attr("fill",'#4daf4a')
-            .attr("transform","translate(835,30)")
+            .attr("transform","translate(830,35)")
             .text("Spotify")
 
         container_u.append("text")
+            .attr("font-family","sans-serif")
             .attr("font-size",20)
             .attr("font-weight","bold")
             .attr("fill",'#e41a1c')
-            .attr("transform","translate(790,250)")
+            .attr("transform","translate(780,255)")
             .text("Apple Music")
     });

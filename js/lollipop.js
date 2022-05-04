@@ -77,8 +77,6 @@ function updategraph(val){
             .attr("font-size",15)
             .call(wrapText, 225)
 
-        console.log(yAxis.selectAll(".tick text"));
-
         var l = container_l.selectAll(".myline")
             .data(data)
 
@@ -124,7 +122,6 @@ function updategraph(val){
 
         function wrapText(text, width) {
             text.each(function() {
-                console.log(d3.select(this));
                 var text = d3.select(this),
                     textContent = text.text(),
                     tempWord = addBreakSpace(textContent).split(/\s+/),

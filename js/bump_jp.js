@@ -12,7 +12,7 @@ var height = canvasHeight-marginH;
 
 /*Container which graph will be inside of*/
 var container_b_j = svg_b_j.append("g")
-    .attr("transform","translate(" + 100 + "," + 50 +")");
+    .attr("transform","translate(" + 100 + "," + 25 +")");
 
 /*Scale for axes*/
 var yScaleB_J = d3.scaleLinear().range([0,height-50]);
@@ -29,24 +29,28 @@ d3.csv("./data/bump_jp.csv").then(function(data)
 
     /*X axis*/
     container_b_j.append("g")
+        .style("font-size","25px")
         .attr("transform", "translate(0, " + height + ")")
         .call(d3.axisBottom(xScaleB_J).ticks(5))
         .append("text")
-        .attr("x",350)
-        .attr("y",50)
+        .attr("x",375)
+        .attr("y",65)
         .attr("fill", "black")
         .text("Week")
+        .attr("font-size",25)
 
     /*Y-axis*/
     container_b_j.append("g")
+        .style("font-size","25px")
         .call(d3.axisLeft(yScaleB_J).ticks(5))
         .append("text")
         .attr("transform","rotate(-90)")
-        .attr("y",0)
+        .attr("y",75)
         .attr("x",-150)
         .attr("dy","-5.1em")
         .attr("fill", "black")
         .text("Rank")
+        .attr("font-size",25)
 
     function hover(elem) {
         var id = elem.srcElement.__data__.substring(0,3).toUpperCase();
