@@ -55,15 +55,15 @@ d3.csv("./data/bump_us.csv").then(function(data)
     function hover(elem) {
         var id = elem.srcElement.__data__.substring(0,3).toUpperCase();
 
-        container_b_u.selectAll('.line').attr("stroke","grey").attr("opacity",0.1);
-        container_b_u.selectAll('.dot').style("fill","grey").attr("opacity",0.1);
-        container_b_u.select('#'+id).attr('stroke', d => {return myColorB_U(d[0])}).attr("opacity",1);
-        container_b_u.selectAll('#'+id+'.dot').style('fill', d => {return myColorB_U(d.Singer)}).attr("opacity",1);
+        container_b_u.selectAll('.line').attr("stroke","grey");
+        container_b_u.selectAll('.dot').style("fill","grey");
+        container_b_u.select('#'+id).attr('stroke', d => {return myColorB_U(d[0])});
+        container_b_u.selectAll('#'+id+'.dot').style('fill', d => {return myColorB_U(d.Singer)});
     }
 
     function exit(elem) {
-        container_b_u.selectAll('.line').attr('stroke', d => {return myColorB_U(d[0])}).attr("opacity",1);
-        container_b_u.selectAll('.dot').style('fill', d => {return myColorB_U(d.Singer)}).attr("opacity",1);
+        container_b_u.selectAll('.line').attr('stroke', d => {return myColorB_U(d[0])});
+        container_b_u.selectAll('.dot').style('fill', d => {return myColorB_U(d.Singer)});
     }
 
     container_b_u.selectAll(".line")
@@ -79,8 +79,7 @@ d3.csv("./data/bump_us.csv").then(function(data)
                 .y(function(d) { return yScaleB_U(+d.Position); })
                 (d[1])
         })
-        .attr("id",function(d){return (d[0].substring(0,3).toUpperCase());})
-        .attr("opacity",1);
+        .attr("id",function(d){return (d[0].substring(0,3).toUpperCase());});
 
     container_b_u.append("g")
         .selectAll(".dot")
@@ -92,8 +91,7 @@ d3.csv("./data/bump_us.csv").then(function(data)
         .attr("cx",function(d){return xScaleB_U(d.Week);})
         .attr("cy",function(d){return yScaleB_U(d.Position);})
         .attr("r",10)
-        .style("fill",function(d){return myColorB_U(d.Singer);})
-        .attr("opacity",1);
+        .style("fill",function(d){return myColorB_U(d.Singer);});
 
     svg_b_u.append("g")
         .attr("class", "legend")
