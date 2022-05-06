@@ -45,6 +45,7 @@ ul.topnav {
     padding: 0;
     overflow: hidden;
     background-color: #333;
+    scroll-snap-align: start;
 }
 ul.topnav li {
     float: left;
