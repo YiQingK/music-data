@@ -46,7 +46,9 @@ ul.topnav {
     overflow: hidden;
     background-color: #333;
 }
-ul.topnav li {float: left;}
+ul.topnav li {
+    float: left;
+}
 
 ul.topnav li a {
     display: block;
@@ -54,11 +56,18 @@ ul.topnav li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-family: Lato,sans-serif;
 }
 
 ul.topnav li a:hover:not(.active) {background-color: #111;}
 
 ul.topnav li a.active {background-color: #04AA6D;}
+
+footer {
+    background-color:#333;
+    padding:10px;
+    margin-top:10px;
+}
 
 @media screen and (max-width: 600px) {
     ul.topnav li {float: none;}
@@ -82,7 +91,26 @@ ul.topnav li a.active {background-color: #04AA6D;}
 }
 
 .h1 {
-    font: 30px Arial, sans-serif;
+    font-size: 40px;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+}
+
+.h2 {
+    font-size: 25px;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+}
+
+.h3 {
+    font-size: 20px;
+    font-family: 'Lato',sans-serif;
+    text-align: center;
+}
+
+.p {
+    font-size: 20px;
+    font-family: Merriweather, serif;
     text-align: center;
 }
 
@@ -98,5 +126,15 @@ div.tooltip {
 }
 
 .legend{
-    font: 20px sans-serif;
+    font-size: 20px;
+    font-family: Lato,sans-serif;
+}
+.f {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: Lato,sans-serif;
+    font-size:15px;
 }

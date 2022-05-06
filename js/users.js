@@ -20,7 +20,7 @@ var yScaleU = d3.scaleLinear().range([height, 0]);
 var xScaleU = d3.scaleLinear().range([0, width]);
 var myColor = d3.scaleOrdinal().range(['#4daf4a','#e41a1c']);
 
-d3.csv("./data/user_data.csv",/*function (d) {return {date: d3.timeParse("%m/%d/%Y")(d.date), type: d.type, number: +d.number,}}*/)
+d3.csv("./data/user_data.csv",)
     .then(function (data)
     {
         yScaleU.domain([0,165]);

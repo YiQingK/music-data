@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="test.css">
 	<script src="https://d3js.org/d3.v7.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
@@ -11,68 +12,108 @@
 <body style="background-color:DarkSeaGreen; scroll-snap-type: y mandatory">
 
 <ul class="topnav">
-	<li><a href="#Home">Home</a></li>
-	<li><a href="#About">About</a></li>
-	<li><a href="#Contact">Contact</a></li>
+	<li><a href="#Home">HOME</a></li>
+	<li><a href="#About">ABOUT</a></li>
+	<li><a href="https://github.com/YiQingK/music-data">GITHUB REPO</a></li>
+
 </ul>
+
 <div class="box">
-	<h1>About the project</h1>
-	<p>Noticing the differences in music taste between my friends and I, I decided to use this project as an opportunity to look into the differences in music taste, comparing amongst different countries as well as seeing if there are trends to a song or artist's popularity.</p>
+	<h1 class="h1">CS360 PROJECT</h1>
+
 </div>
 
 <div class="box">
-	<h1 class="h1">Spotify vs Apple Music</h1>
+	<h2 class="h2">ABOUT THE PROJECT</h2>
+	<p class="p">Noticing the differences in music taste between my friends and I, I decided to use this project as an opportunity to look into the differences in music taste, comparing amongst different countries as well as seeing if there are trends to a song or artist's popularity.</p>
+</div>
+
+<div class="box">
+	<h2 class="h2">SPOTIFY VS APPLE MUSIC</h2>
 	<div class="container" id="users">
 		<script src="./js/users.js"></script>
 	</div>
+	<p class="p">Data taken from
+	<a href="https://www.businessofapps.com/data/spotify-statistics/" style="color: #04AA6D">Business of Apps</a>
+	</p>
 </div>
 
 <div class="box">
-	<p>From this line chart, we can see that spotify has a much higher user count and therefore should be the platform data should be taken and compared from.</p>
+	<p class="p">From this line chart, we can see that spotify has a much higher user count and therefore should be the platform data should be taken and compared from.</p>
 </div>
 
 <div class="box">
-	<h1 class="h1">Top 10 highest streaming songs</h1>
+	<h2 class="h2">TOP 10 HIGHEST STREAMING SONGS</h2>
 	<div class="container" id="lollipop">
-		<div><p class="legend">Last week of </p><p class ="legend" id="value-time"></p></div>
-		<div><div id="slider-time"></div></div>
+		<div><p class ="p">Last week of <span  id="value-time"></span></p></div>
+		<div id="slider-time"></div>
 		<script src="./js/lollipop.js"></script>
 	</div>
 
 </div>
 <div class="box">
-	<h1 class="h1">World Map</h1>
-	<p>Place your mouse over <span style="color: #69b3a2;font-weight: bold">colored countries</span> to check out what song is in the top of the charts.
-		Streaming data is not available for <span style="font-weight: bold">blacked-out countries</span>.
-		Feel free to click on the countries to check out the songs.
-		You are also able to zoom-in to look at smaller countries</p>
+	<h2 class="h2">WORLD MAP</h2>
+	<p class="p">
+		You are able to interact
+			<span style="font-weight: bold;color:#69b3a2">colored countries</span>
+		by either hovering or clicking on them.
+		<br>
+		When you <span style="font-weight: bold">hover</span> over them, the top song and its artist will be displayed
+		<br>
+		while when its <span style="font-weight: bold">clicked</span>, it will bring you to the spotify site for the song.
+		<br>
+		These interactions are not available for <span style="font-weight: bold">black-colored countries</span> as there are no data available for them.
+	</p>
 	<div class="container" id="map">
 		<script src="./js/worldmap.js"></script>
 	</div>
 </div>
 
 <div class="box">
-	<h1 class="h1">Bump Charts</h1>
+	<h2 class="h2">TOP 5 ARTIST OVER 5 WEEKS</h2>
+	<p class="p">
+		These bump charts below shows the change of the top 5 singers globally, in Japan as well as USA over 5 weeks.
+		Specifically, from Week of March 17 to Week of April 14
+	<br>
+		Feel free to <span style="font-weight: bold">hover</span> over the color labels to <span style="font-weight: bold">highlight</span> the specific artist
+	</p>
 </div>
 
 <div class="box">
-	<h1 class="h1">Global</h1>
+	<h2 class="h2">GLOBAL</h2>
 	<div class="container" id="bump">
 		<script src="./js/bump.js"></script>
 	</div>
 </div>
 <div class="box">
-	<h1 class="h1">Japan</h1>
+	<h3 class="h3">JAPAN</h3>
 	<div class="container" id="bump_jp">
 		<script src="./js/bump_jp.js"></script>
 	</div>
 </div>
 <div class="box">
-	<h1 class="h1">USA</h1>
+	<h3 class="h3">USA</h3>
 	<div class="container" id="bump_us">
 		<script src="./js/bump_us.js"></script>
 	</div>
 </div>
+
+<div class="box">
+	<p class="p">
+		Looking at the artist in the USA and Japan, we can see that USA has more top artist in common with the global rankings.
+		This is due to USA making up a larger number of users than Japan.
+	</p>
+</div>
+
+<footer class="footer">
+	<p class="f">Created by Yi Qing Khoo
+	<br>
+		Data from
+		<a href="https://charts.spotify.com/charts/overview/global" style="color: #04AA6D">Spotify Charts</a>
+		unless stated otherwise
+	</p>
+
+</footer>
 
 <!--
 <div class="left">

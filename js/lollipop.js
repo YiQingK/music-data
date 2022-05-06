@@ -16,7 +16,7 @@ var div = d3.select("div#lollipop").append("div")
 var width = canvasWidth-marginW;
 var height = canvasHeight-marginH;
 
-var container_l = svg_l.append("g")//.attr("transform","translate(100,0)");
+var container_l = svg_l.append("g");
 
 var x = d3.scaleLinear().range([0,width]);
 var xAxis = container_l.append("g")
@@ -42,7 +42,7 @@ var sliderTime = d3
     .tickValues(dataTime)
     .default(new Date(2022,0))
     .on('onchange', val => {
-        d3.select('p#value-time').text(d3.timeFormat('%B')(val));
+        d3.select('span#value-time').text(d3.timeFormat('%B')(val));
         updategraph(d3.timeFormat('%B')(val));
     });
 
@@ -56,7 +56,7 @@ var gTime = d3
 
 gTime.call(sliderTime);
 
-d3.select('p#value-time').text(d3.timeFormat('%B')(sliderTime.value()));
+d3.select('span#value-time').text(d3.timeFormat('%B')(sliderTime.value()));
 
 function updategraph(val){
     d3.csv("./data/"+val+".csv").then(function(data)
@@ -117,7 +117,7 @@ function updategraph(val){
                 .attr("cy",function(d){return y(d.track_name);})
                 .attr("r",7.5)
                 .style("stroke","black")
-                .style("fill","#92a8d1")
+                .style("fill","#69b3a2")
 
 
         function wrapText(text, width) {
