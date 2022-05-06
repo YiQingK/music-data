@@ -67,7 +67,7 @@ function updategraph(val){
         });
 
         x.domain([15000000,d3.max(data, function (d){return +d.streams})]);
-        xAxis.transition().duration(1000).call(d3.axisBottom(x).tickFormat(d3.format(".2s")))
+        xAxis.transition().duration(1000).call(d3.axisBottom(x).ticks(6).tickFormat(d3.format(".2s")))
             .selectAll("text")
             .attr("font-size",20);
 
