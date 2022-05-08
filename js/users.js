@@ -43,7 +43,7 @@ d3.csv("./data/user_data.csv",)
 
         /*Y-axis gridline*/
         container_u.append("g")
-            .call(d3.axisLeft(yScaleU).tickSize(-canvasWidth).tickFormat(""))
+            .call(d3.axisLeft(yScaleU).tickSize(-850).tickFormat(""))
             .attr("stroke-opacity",0.1)
 
         /*Y-axis*/
@@ -85,7 +85,23 @@ d3.csv("./data/user_data.csv",)
             .attr("font-family","sans-serif")
             .attr("font-size",20)
             .attr("font-weight","bold")
+            .attr("fill",'#4daf4a')
+            .attr("transform","translate(835,60)")
+            .text("165M")
+
+        container_u.append("text")
+            .attr("font-family","sans-serif")
+            .attr("font-size",20)
+            .attr("font-weight","bold")
             .attr("fill",'#e41a1c')
             .attr("transform","translate(780,255)")
             .text("Apple Music")
+
+        container_u.append("text")
+            .attr("font-family","sans-serif")
+            .attr("font-size",20)
+            .attr("font-weight","bold")
+            .attr("fill",'#e41a1c')
+            .attr("transform","translate(820,280)")
+            .text("88M")
     });
