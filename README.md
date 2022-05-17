@@ -17,7 +17,7 @@ This project seeks to provide data visualizations exploring music taste and tren
 ## Link
 https://yiqingk.github.io/music-data/
 
-##Rebuild Instructions
+## Rebuild Instructions
 + Clone repository by running `git clone https://github.com/YiQingK/music-data.git`
 + Open folder locally in your choice of IDE/editor such as VScode or WebStorm.
 + Create a new branch by running `git checkout -b <NEW_BRANCH_NAME>`
