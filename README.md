@@ -4,9 +4,9 @@
 This project seeks to provide data visualizations exploring music taste and trends. 
 
 ## Table Of Contents
-- [Features] (#features)
-- [Link] (#link)
-- [Rebuild instructions] (#rebuild-instructions)
+- [Features](#features)
+- [Link](#link)
+- [Rebuild instructions](#rebuild-instructions)
 
 ## Features
 + Line chart comparing Spotify and Apple Music users
