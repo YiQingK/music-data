@@ -3,10 +3,12 @@ var canvasHeight = 500;
 var marginH = 100;
 var marginW = 300;
 
+/*Create SVG tag with specified width and height*/
 var svg_b = d3.select("#bump")
     .append("svg")
     .attr("viewBox", "0 0 1000 500");
 
+/*Data to keep within margin*/
 var width = canvasWidth-marginW;
 var height = canvasHeight-marginH;
 
@@ -14,7 +16,7 @@ var height = canvasHeight-marginH;
 var container_b = svg_b.append("g")
     .attr("transform","translate(" + 100 + "," + 25 +")");
 
-/*Scale for axes*/
+/*Scale for axes and color*/
 var yScaleB = d3.scaleLinear().range([0,height-50]);
 var xScaleB = d3.scaleLinear().range([50, width]);
 var myColorB = d3.scaleOrdinal().range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#cc9900','#cc0099','#003300']);
@@ -52,6 +54,7 @@ d3.csv("./data/bump.csv").then(function(data)
         .text("Rank")
         .attr("font-size",25)
 
+    /*When mouseover legend*/
     function hover(elem) {
         var id = elem.srcElement.__data__.substring(0,2).toUpperCase();
 
@@ -61,11 +64,13 @@ d3.csv("./data/bump.csv").then(function(data)
         container_b.selectAll('#'+id+'.dot').style('fill', d => {return myColorB(d.Singer)});
     }
 
+    /*When mouseout legend*/
     function exit(elem) {
         container_b.selectAll('.line').attr('stroke', d => {return myColorB(d[0])});
         container_b.selectAll('.dot').style('fill', d => {return myColorB(d.Singer)});
     }
 
+    /*Draws line*/
     container_b.selectAll(".line")
         .data(sumstat)
         .join("path")
@@ -81,6 +86,7 @@ d3.csv("./data/bump.csv").then(function(data)
         })
         .attr("id",function(d){return (d[0].substring(0,2).toUpperCase());});
 
+    /*Draws circle*/
     container_b.append("g")
         .selectAll(".dot")
         .data(data)
@@ -93,6 +99,7 @@ d3.csv("./data/bump.csv").then(function(data)
         .attr("r",10)
         .style("fill",function(d){return myColorB(d.Singer);});
 
+    /*Legend*/
     svg_b.append("g")
         .attr("class", "legend")
         .attr("transform", "translate(850,100)");

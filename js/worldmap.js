@@ -1,10 +1,11 @@
 var width = 975;
 var height = 500;
 
+/*Create SVG tag with specified width and height*/
 var svg_m = d3.select('#map').append('svg')
-    //.attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", "0 0 975 500");
 
+/*Create div tag for tooltip*/
 var div = d3.select("#map").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
@@ -15,7 +16,7 @@ var path = d3.geoPath()
     .projection(projection);
 
 const mapdata = new Map();
-// Load external data and boot
+
 Promise.all([
     d3.json("./data/map.geojson"),
     d3.csv("./data/map_data.csv", function(d) {

@@ -60,6 +60,7 @@ d3.csv("./data/user_data.csv",)
             .text("Users in millions")
             .attr("font-size",20)
 
+        /*Draws line*/
         container_u.selectAll(".line")
             .data(sumstat)
             .join("path")
@@ -73,6 +74,7 @@ d3.csv("./data/user_data.csv",)
                     (d[1])
             })
 
+        /*Legend - Spotify*/
         container_u.append("text")
             .attr("font-family","sans-serif")
             .attr("font-size",20)
@@ -81,6 +83,7 @@ d3.csv("./data/user_data.csv",)
             .attr("transform","translate(830,35)")
             .text("Spotify")
 
+        /*Legend - 165M*/
         container_u.append("text")
             .attr("font-family","sans-serif")
             .attr("font-size",20)
@@ -89,6 +92,7 @@ d3.csv("./data/user_data.csv",)
             .attr("transform","translate(835,60)")
             .text("165M")
 
+        /*Legend - Apple Music*/
         container_u.append("text")
             .attr("font-family","sans-serif")
             .attr("font-size",20)
@@ -97,6 +101,7 @@ d3.csv("./data/user_data.csv",)
             .attr("transform","translate(780,255)")
             .text("Apple Music")
 
+        /*Legend - 88M*/
         container_u.append("text")
             .attr("font-family","sans-serif")
             .attr("font-size",20)

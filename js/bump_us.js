@@ -3,10 +3,12 @@ var canvasHeight = 500;
 var marginH = 100;
 var marginW = 300;
 
+/*Create SVG tag with specified width and height*/
 var svg_b_u = d3.select("#bump_us")
     .append("svg")
     .attr("viewBox", "0 0 1000 500");
 
+/*Data to keep within margin*/
 var width = canvasWidth-marginW;
 var height = canvasHeight-marginH;
 
@@ -14,7 +16,7 @@ var height = canvasHeight-marginH;
 var container_b_u = svg_b_u.append("g")
     .attr("transform","translate(" + 100 + "," + 25 +")");
 
-/*Scale for axes*/
+/*Scale for axes and color*/
 var yScaleB_U = d3.scaleLinear().range([0,height-50]);
 var xScaleB_U = d3.scaleLinear().range([50, width]);
 var myColorB_U = d3.scaleOrdinal().range(['#e41a1c','#ff7f00','#006600','#377eb8','#990099','#a65628']);
@@ -52,6 +54,7 @@ d3.csv("./data/bump_us.csv").then(function(data)
         .text("Rank")
         .attr("font-size",25)
 
+    /*When mouseover legend*/
     function hover(elem) {
         var id = elem.srcElement.__data__.substring(0,3).toUpperCase();
 
@@ -61,11 +64,13 @@ d3.csv("./data/bump_us.csv").then(function(data)
         container_b_u.selectAll('#'+id+'.dot').style('fill', d => {return myColorB_U(d.Singer)});
     }
 
+    /*When mouseout legend*/
     function exit(elem) {
         container_b_u.selectAll('.line').attr('stroke', d => {return myColorB_U(d[0])});
         container_b_u.selectAll('.dot').style('fill', d => {return myColorB_U(d.Singer)});
     }
 
+    /*Draws line*/
     container_b_u.selectAll(".line")
         .data(sumstat)
         .join("path")
@@ -81,6 +86,7 @@ d3.csv("./data/bump_us.csv").then(function(data)
         })
         .attr("id",function(d){return (d[0].substring(0,3).toUpperCase());});
 
+    /*Draws circle*/
     container_b_u.append("g")
         .selectAll(".dot")
         .data(data)
@@ -93,6 +99,7 @@ d3.csv("./data/bump_us.csv").then(function(data)
         .attr("r",10)
         .style("fill",function(d){return myColorB_U(d.Singer);});
 
+    /*Legend*/
     svg_b_u.append("g")
         .attr("class", "legend")
         .attr("transform", "translate(850,100)");

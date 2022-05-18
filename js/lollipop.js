@@ -4,34 +4,42 @@ var marginH = 100;
 var marginW = 300;
 var marginL = 200;
 
+/*Create SVG tag with specified width and height*/
 var svg_l = d3.select("div#lollipop")
     .append("svg")
     .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", "0 0 1000 500");
 
+/*Create div tag for tooltip*/
 var div = d3.select("div#lollipop").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
+/*Data to keep within margin*/
 var width = canvasWidth-marginW;
 var height = canvasHeight-marginH;
 
 var container_l = svg_l.append("g");
 
+/*X-axis*/
 var x = d3.scaleLinear().range([0,width]);
 var xAxis = container_l.append("g")
             .attr("transform", "translate(250, 400)");
 
+/*Y-axis*/
 var y = d3.scaleBand().range([400,0]);
 var yAxis = container_l.append("g")
             .attr("transform","translate(250,0)");
 
+/*To format tooltip number*/
 var formatNum = d3.format(",");
 
+/*Range for slider*/
 var dataTime = d3.range(0, 4).map(function(d) {
     return new Date(2022, 0+d);
 });
 
+/*Slider*/
 var sliderTime = d3
     .sliderBottom()
     .min(d3.min(dataTime))
@@ -58,6 +66,7 @@ gTime.call(sliderTime);
 
 d3.select('span#value-time').text(d3.timeFormat('%B')(sliderTime.value()));
 
+/*Function to update graph when slider value changes*/
 function updategraph(val){
     d3.csv("./data/"+val+".csv").then(function(data)
     {
@@ -66,17 +75,20 @@ function updategraph(val){
             return b.streams - a.streams;
         });
 
+        /*X-axis*/
         x.domain([15000000,d3.max(data, function (d){return +d.streams})]);
         xAxis.transition().duration(1000).call(d3.axisBottom(x).ticks(6).tickFormat(d3.format(".2s")))
             .selectAll("text")
             .attr("font-size",20);
 
+        /*Y-axis*/
         y.domain(data.map(function(d){return d.track_name;}))
         yAxis.call(d3.axisLeft(y))
             .selectAll("text")
             .attr("font-size",15)
             .call(wrapText, 225)
 
+        /*Draw line*/
         var l = container_l.selectAll(".myline")
             .data(data)
 
@@ -93,6 +105,7 @@ function updategraph(val){
                 .attr("y2", function(d) { return y(d.track_name); })
                 .attr("stroke", "grey")
 
+        /*Draw circles at the end of lollipop chart*/
         var c = container_l.selectAll("circle")
             .data(data)
 
@@ -119,7 +132,7 @@ function updategraph(val){
                 .style("stroke","black")
                 .style("fill","#69b3a2")
 
-
+        /*To wrap long y-axis tick text*/
         function wrapText(text, width) {
             text.each(function() {
                 var text = d3.select(this),
@@ -190,4 +203,5 @@ function updategraph(val){
     })
 }
 
+/*Initial load of graph*/
 updategraph(d3.timeFormat('%B')(sliderTime.value()));
